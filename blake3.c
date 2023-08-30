@@ -131,7 +131,7 @@ INLINE void chunk_state_update(blake3_chunk_state *self, const uint8_t *input,
 {
   while (input_len > BLAKE3_BLOCK_LEN)
   {
-    printf("take in chunk_state_update is %d\n", input_len);
+    // printf("take in chunk_state_update is %d\n", input_len);
     blake3_compress_in_place(self->cv, input, BLAKE3_BLOCK_LEN,
                              self->chunk_counter,
                              self->flags | chunk_state_maybe_start_flag(self));
@@ -141,7 +141,7 @@ INLINE void chunk_state_update(blake3_chunk_state *self, const uint8_t *input,
   }
 
   size_t take = chunk_state_fill_buf(self, input, input_len);
-  printf("take in chunk_state_update after fill is %d\n", take);
+  // printf("take in chunk_state_update after fill is %d\n", take);
   input += take;
   input_len -= take;
 }
@@ -491,7 +491,7 @@ void blake3_hasher_update(blake3_hasher *self, const void *input,
 
   const uint8_t *input_bytes = (const uint8_t *)input;
 
-  printf("take in blake3_hasher_update CHUNK_LEN > input_len > 0  is %d\n", input_len);
+  // printf("take in blake3_hasher_update CHUNK_LEN > input_len > 0  is %d\n", input_len);
   chunk_state_update(&self->chunk, input_bytes, input_len);
   hasher_merge_cv_stack(self, self->chunk.chunk_counter);
 }
